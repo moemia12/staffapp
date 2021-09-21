@@ -5,6 +5,7 @@ import { ImageList, ImageListItem, ImageListItemBar, makeStyles } from '@materia
 import Pagination from '@material-ui/lab/Pagination';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import Button from '@material-ui/core/Button'
+import SearchBar from './searchbox'
 //import profilepic from './profilepic'
 
 const useStyles = makeStyles((theme) => ({
@@ -13,22 +14,48 @@ const useStyles = makeStyles((theme) => ({
     height: 1050,
     padding: 150,
   },
+  heading: {
+    position: 'relative',
+    left: 140,
+    textAlign: 'left',
+  },
   infoBar: {
     background: '	#e7eff9',
     boxShadow: '0px 7px 20px -10px rgba(0,0,0,1)',
     backgroundColor: '#000000',
     backgroundImage: 'linear-gradient(315deg, #000000 0%, #414141 74%)',
-    fontWeight: 'bold',
+
   },
   paginator: {
     '& > *': {
       marginLeft: theme.spacing(112),
       position: 'relative',
-      bottom: 20,
-      
+      bottom: 300,
+
     },
+  },
+  filterButton: {
+    background: '	#e7eff9',
+    boxShadow: '0px 7px 20px -10px rgba(0,0,0,1)',
+    backgroundColor: '#000000',
+    backgroundImage: 'linear-gradient(315deg, #000000 0%, #414141 74%)',
+    borderRadius: 100,
+    padding: 14,
+    margin: theme.spacing(1),
+    cursor: 'pointer',
+    left: 500,
+  },
+  staffFilter: {
+    position: 'relative',
+      top: 120,
+      left: 650,
+  },
+  staffFilterText: {
+    position: 'absolute',
+    left: 860,
+    bottom: 30,
   }
-  
+
 }))
 
 const App = () => {
@@ -74,7 +101,27 @@ const App = () => {
   return (
     <div className="App">
 
+      <div className={style.heading}>
+      <h1>Staff Directory</h1>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet.</p>
+      </div>
+        
+      <SearchBar></SearchBar>
+  
+
+      {/** Beer Filter */}
+      <div className={style.staffFilter} style={{ zIndex: '100' }} >
+        <h4 className={style.staffFilterText}>Select your Alcohol By Volume</h4>
+
+        <span className={style.filterButton} style={{ color: 'white' }} onClick={(e) => filterByVolume(0, 5)}>Birthday Order </span>
+        <span className={style.filterButton} style={{ color: 'white' }} onClick={(e) => filterByVolume(5, 10)}>Random Order</span>
+  
+
+      </div>
+
+      {/** Staff Display */}
       <div className={style.root}>
+        <p style={{ position: 'absolute', left: 150, bottom: 350, fontWeight: 'bold' }}>Showing 20 Colleague(s)</p>
         <ImageList rowHeight={390} cols={4}>
 
           <ImageListItem key="Subheader" cols={4} style={{ height: 'auto' }}></ImageListItem>
@@ -89,15 +136,15 @@ const App = () => {
         </ImageList>
       </div>
 
-       {/**Pagination component */}
-       <Pagination
-          className={style.paginator}
-          count={3}
-          color="secondary"
-          hideNextButton={true}
-          hidePrevButton={true}
-          onChange={handlePageChange}
-        />
+      {/**Pagination component */}
+      <Pagination
+        className={style.paginator}
+        count={3}
+        color="secondary"
+        hideNextButton={true}
+        hidePrevButton={true}
+        onChange={handlePageChange}
+      />
     </div>
   );
 }
